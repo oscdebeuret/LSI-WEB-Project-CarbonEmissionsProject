@@ -2,16 +2,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
-import { Vue3GoogleOAuth } from 'vue3-google-login'
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import './assets/tailwind.css'
 
 const app = createApp(App)
 
-app.use(Vue3GoogleOAuth, {
-  clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-})
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.mount('#app')

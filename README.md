@@ -33,3 +33,17 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Dépendances
+
+```sh
+npm install \
+  axios \
+  pinia \
+  vue-router \
+  vue3-google-login \
+  @azure/msal-browser \
+  chart.js \
+  vue-chartjs \
+  @fortawesome/fontawesome-free
+```
