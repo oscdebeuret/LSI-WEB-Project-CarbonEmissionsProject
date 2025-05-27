@@ -1,34 +1,86 @@
 import { defineStore } from 'pinia'
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from 'firebase/auth'
+import { app } from '../firebase'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
-    token: null,
+    loading: true,
+    error: null,
   }),
 
   getters: {
     isAuthenticated: (state) => !!state.user,
+    userProfile: (state) => state.user,
   },
 
   actions: {
-    loginWithGoogle(credential) {
-      try {
-        const payload = JSON.parse(atob(credential.split('.')[1]))
-        this.user = {
-          name: payload.name,
-          email: payload.email,
-          picture: payload.picture,
+    initAuth() {
+      const auth = getAuth(app)
+
+      onAuthStateChanged(auth, (user) => {
+        this.loading = false
+
+        if (user) {
+          this.user = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          }
+        } else {
+          this.user = null
         }
-        this.token = credential
-      } catch (e) {
-        console.error('Échec du décodage du token Google :', e)
+      })
+    },
+
+    async signInWithGoogle() {
+      this.loading = true
+      this.error = null
+
+      try {
+        const auth = getAuth(app)
+        const provider = new GoogleAuthProvider()
+        const result = await signInWithPopup(auth, provider)
+
+        this.user = {
+          uid: result.user.uid,
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        }
+
+        return result.user
+      } catch (error) {
+        this.error = error.message
+        throw error
+      } finally {
+        this.loading = false
       }
     },
-    logout() {
-      this.user = null
-      this.token = null
+
+    async signOut() {
+      const auth = getAuth(app)
+
+      try {
+        await signOut(auth)
+        this.user = null
+      } catch (error) {
+        this.error = error.message
+        throw error
+      }
     },
   },
 
-  persist: true,
+  persist: {
+    key: 'auth-store',
+    storage: localStorage,
+    paths: ['user'],
+  },
 })

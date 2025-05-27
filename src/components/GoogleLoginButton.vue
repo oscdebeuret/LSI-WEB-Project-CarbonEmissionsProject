@@ -1,28 +1,16 @@
 <template>
-  <GoogleLogin :client-id="clientId" :callback="handleSuccess"
-    class="cursor-pointer bg-white border px-4 py-2 rounded shadow flex items-center gap-2">
-    <i class="fab fa-google text-red-500"></i>
-    <span>Se connecter avec Google</span>
-  </GoogleLogin>
+  <div v-if="!auth.isAuthenticated">
+    <button @click="auth.login" class="bg-blue-600 text-white px-4 py-2 rounded">
+      Connexion Google
+    </button>
+  </div>
+  <div v-else>
+    Connecté : {{ auth.user.name }}
+    <button @click="auth.logout" class="ml-4 text-red-600">Déconnexion</button>
+  </div>
 </template>
 
 <script setup>
-import { GoogleLogin } from 'vue3-google-login'
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-
-const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
-const router = useRouter()
 const auth = useAuthStore()
-
-function handleSuccess(response) {
-  const { credential } = response
-  if (!credential) {
-    console.error('Aucun token reçu depuis Google')
-    return
-  }
-
-  auth.loginWithGoogle(credential)
-  router.push('/dashboard')
-}
 </script>
