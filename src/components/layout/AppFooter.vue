@@ -54,18 +54,6 @@
                 Tableau de bord
               </RouterLink>
             </li>
-            <li v-if="isAuthenticated">
-              <RouterLink to="/calculator/cloud"
-                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
-                Calculateurs
-              </RouterLink>
-            </li>
-            <li v-if="isAuthenticated">
-              <RouterLink to="/comparisons"
-                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
-                Comparaisons
-              </RouterLink>
-            </li>
             <li v-if="!isAuthenticated">
               <RouterLink to="/login"
                 class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
@@ -91,10 +79,8 @@
         </div>
       </div>
 
-      <!-- Séparateur -->
       <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div class="flex flex-col md:flex-row items-center justify-between">
-          <!-- Copyright -->
           <div class="flex items-center space-x-4 mb-4 md:mb-0">
             <p class="text-sm text-gray-500 dark:text-gray-400">
               © 2024 CO₂ Calculator. Tous droits réservés.
@@ -102,7 +88,6 @@
           </div>
         </div>
 
-        <!-- Message écologique -->
         <div
           class="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl">
           <div class="flex items-center justify-center text-center">

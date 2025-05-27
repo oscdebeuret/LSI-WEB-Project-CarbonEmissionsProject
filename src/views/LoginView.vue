@@ -79,7 +79,6 @@
                   <path fill="#FFB900" d="M13 13h10v10H13z" />
                 </svg>
                 <span class="text-lg">Continuer avec Microsoft</span>
-                <span class="ml-2 text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded-full">Bientôt</span>
               </div>
             </button>
           </div>
