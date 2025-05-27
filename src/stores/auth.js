@@ -40,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async signInWithGoogle() {
+    async signInWithGoogle(router, redirectTo = '/dashboard') {
       this.loading = true
       this.error = null
 
@@ -56,6 +56,7 @@ export const useAuthStore = defineStore('auth', {
           photoURL: result.user.photoURL,
         }
 
+        router.push(redirectTo)
         return result.user
       } catch (error) {
         this.error = error.message
@@ -65,12 +66,14 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    async signOut() {
+    async signOut(router) {
       const auth = getAuth(app)
 
       try {
         await signOut(auth)
         this.user = null
+
+        router.push('/')
       } catch (error) {
         this.error = error.message
         throw error

@@ -2,9 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { auth } from '@/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 
-import LoginView from '@/components/auth/LoginView.vue'
+import LoginView from '@/views/LoginView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import HomeView from '@/views/HomeView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
   {
@@ -23,6 +24,20 @@ const routes = [
     component: DashboardView,
     meta: { requiresAuth: true },
   },
+  {
+    path: '/profile',
+    name: 'ProfileView',
+    component: ProfileView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    beforeEnter: async (to, from, next) => {
+      await auth.signOut()
+      next('/')
+    },
+  },
 ]
 
 const router = createRouter({
@@ -35,7 +50,7 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
   if (requiresAuth && !user) {
-    next('/login')
+    next({ path: '/login', query: { redirect: to.fullPath } })
   } else if (to.path === '/login' && user) {
     next('/dashboard')
   } else {

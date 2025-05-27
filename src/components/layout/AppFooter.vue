@@ -1,12 +1,122 @@
 <template>
-  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-auto">
-    <div class="container mx-auto px-4 py-6">
-      <div class="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-5">
-          &copy; {{ currentYear }} CO₂ Calculator. Tous droits réservés.
-        </p>
-        <p>Propulsé par l'API Climatiq pour des calculs d'émissions de CO₂ précis.</p>
-        <p class="mt-1">Cette application est conçue pour sensibiliser à l'impact environnemental du numérique.</p>
+  <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Logo et description -->
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="h-10 w-10 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+              CO₂ Calculator
+            </span>
+          </div>
+
+          <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-md leading-relaxed">
+            Calculez, comprenez et réduisez votre empreinte carbone pour un avenir plus durable.
+            Ensemble, agissons pour notre planète.
+          </p>
+
+          <!-- Statistiques rapides -->
+          <div class="grid grid-cols-2 gap-4 max-w-sm">
+            <div class="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-xl">
+              <div class="text-lg font-bold text-green-600 dark:text-green-400">12.5T</div>
+              <div class="text-xs text-gray-600 dark:text-gray-400">CO₂ moyen/an</div>
+            </div>
+            <div class="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+              <div class="text-lg font-bold text-blue-600 dark:text-blue-400">2.3T</div>
+              <div class="text-xs text-gray-600 dark:text-gray-400">Objectif 2030</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            Navigation
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <RouterLink to="/"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Accueil
+              </RouterLink>
+            </li>
+            <li v-if="isAuthenticated">
+              <RouterLink to="/dashboard"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Tableau de bord
+              </RouterLink>
+            </li>
+            <li v-if="isAuthenticated">
+              <RouterLink to="/calculator/cloud"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Calculateurs
+              </RouterLink>
+            </li>
+            <li v-if="isAuthenticated">
+              <RouterLink to="/comparisons"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Comparaisons
+              </RouterLink>
+            </li>
+            <li v-if="!isAuthenticated">
+              <RouterLink to="/login"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Se connecter
+              </RouterLink>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Ressources -->
+        <div>
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            Ressources
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a href="https://www.climatiq.io/"
+                class="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
+                Climatiq API
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Séparateur -->
+      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <!-- Copyright -->
+          <div class="flex items-center space-x-4 mb-4 md:mb-0">
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              © 2024 CO₂ Calculator. Tous droits réservés.
+            </p>
+          </div>
+        </div>
+
+        <!-- Message écologique -->
+        <div
+          class="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl">
+          <div class="flex items-center justify-center text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 dark:text-green-400 mr-2" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="text-sm text-green-700 dark:text-green-300">
+              <strong>Le saviez-vous ?</strong> Chaque action compte ! Réduire de 1kg de CO₂ par jour équivaut à planter
+              45 arbres par an.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
@@ -14,6 +124,8 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 
-const currentYear = computed(() => new Date().getFullYear());
+const authStore = useAuthStore();
+const isAuthenticated = computed(() => authStore.isAuthenticated);
 </script>
