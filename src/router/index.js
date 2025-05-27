@@ -16,12 +16,10 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginView,
-    redirect: () => {
-      return auth.currentUser ? '/dashboard' : '/login'
-    },
   },
   {
     path: '/dashboard',
+    name: 'Dashboard',
     component: DashboardView,
     meta: { requiresAuth: true },
   },
@@ -33,8 +31,8 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
   const user = await getCurrentUser()
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
   if (requiresAuth && !user) {
     next('/login')
