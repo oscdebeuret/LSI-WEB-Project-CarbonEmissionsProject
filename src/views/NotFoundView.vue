@@ -101,7 +101,6 @@
 <script setup>
 import { computed } from 'vue';
 
-// Faits écologiques aléatoires
 const ecoFacts = [
   "Chaque recherche Google génère environ 0,2g de CO₂. Utilisez des mots-clés précis pour réduire votre impact !",
   "Un email avec une pièce jointe de 1MB génère environ 19g de CO₂. Pensez à compresser vos fichiers !",
@@ -120,7 +119,6 @@ const randomEcoFact = computed(() => {
 </script>
 
 <style scoped>
-/* Animation personnalisée pour le rebond */
 @keyframes bounce {
 
   0%,

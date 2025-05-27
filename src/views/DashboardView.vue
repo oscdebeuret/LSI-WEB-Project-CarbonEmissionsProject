@@ -1,7 +1,6 @@
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
-    <!-- Particules d'arrière-plan -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
         class="absolute -top-40 -right-40 w-80 h-80 bg-green-200 dark:bg-green-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob">
@@ -22,30 +21,8 @@
               Tableau de bord 🌱
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-300">
-              Bienvenue {{ userName }}, suivez et réduisez votre empreinte carbone
+              Bienvenue {{ userName }}, calculez votre empreinte carbone grâce à Climatiq API
             </p>
-          </div>
-
-          <div class="mt-4 md:mt-0 flex items-center space-x-4">
-            <!-- Sélecteur de période -->
-            <select v-model="selectedPeriod"
-              class="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent">
-              <option value="7">7 derniers jours</option>
-              <option value="30">30 derniers jours</option>
-              <option value="90">3 derniers mois</option>
-              <option value="365">Dernière année</option>
-            </select>
-
-            <!-- Bouton d'export -->
-            <button
-              class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors duration-200 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Exporter
-            </button>
           </div>
         </div>
       </div>
@@ -54,7 +31,7 @@
           class="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
           <div class="flex items-center justify-between">
             <div>
-              <AppComp></AppComp>
+              <ClimatiqComp></ClimatiqComp>
             </div>
           </div>
         </div>
@@ -66,7 +43,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import AppComp from '@/components/AppComp.vue';
+import ClimatiqComp from '@/components/ClimatiqComp.vue';
 
 const authStore = useAuthStore();
 const userName = computed(() => authStore.user?.displayName || 'Utilisateur');

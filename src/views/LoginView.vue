@@ -35,7 +35,7 @@
               Connectez-vous
             </h2>
             <p class="mt-2 text-gray-600 dark:text-gray-400">
-              Choisissez votre méthode de connexion préférée
+              Choisissez votre méthode de connexion
             </p>
           </div>
 

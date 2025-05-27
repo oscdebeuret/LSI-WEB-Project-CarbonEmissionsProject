@@ -2,7 +2,6 @@
   <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <!-- Logo et description -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
             <div
@@ -22,21 +21,8 @@
             Calculez, comprenez et réduisez votre empreinte carbone pour un avenir plus durable.
             Ensemble, agissons pour notre planète.
           </p>
-
-          <!-- Statistiques rapides -->
-          <div class="grid grid-cols-2 gap-4 max-w-sm">
-            <div class="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-xl">
-              <div class="text-lg font-bold text-green-600 dark:text-green-400">12.5T</div>
-              <div class="text-xs text-gray-600 dark:text-gray-400">CO₂ moyen/an</div>
-            </div>
-            <div class="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-              <div class="text-lg font-bold text-blue-600 dark:text-blue-400">2.3T</div>
-              <div class="text-xs text-gray-600 dark:text-gray-400">Objectif 2030</div>
-            </div>
-          </div>
         </div>
 
-        <!-- Navigation -->
         <div>
           <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
             Navigation
@@ -63,7 +49,6 @@
           </ul>
         </div>
 
-        <!-- Ressources -->
         <div>
           <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
             Ressources
@@ -83,22 +68,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="flex items-center space-x-4 mb-4 md:mb-0">
             <p class="text-sm text-gray-500 dark:text-gray-400">
-              © 2024 CO₂ Calculator. Tous droits réservés.
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl">
-          <div class="flex items-center justify-center text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 dark:text-green-400 mr-2" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p class="text-sm text-green-700 dark:text-green-300">
-              <strong>Le saviez-vous ?</strong> Chaque action compte ! Réduire de 1kg de CO₂ par jour équivaut à planter
-              45 arbres par an.
+              © 2025 CO₂ Calculator. Tous droits réservés.
             </p>
           </div>
         </div>

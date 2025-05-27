@@ -15,7 +15,6 @@
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Header du dashboard -->
       <div class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
@@ -51,9 +50,7 @@
         </div>
       </div>
 
-      <!-- Cartes de statistiques principales -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Total CO2 -->
         <div
           class="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
           <div class="flex items-center justify-between">
