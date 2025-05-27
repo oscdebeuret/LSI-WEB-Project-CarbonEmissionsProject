@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900 dark:to-teal-900">
     <Navbar />
 
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 min-h-[80vh]">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -16,6 +16,13 @@
 <script setup>
 import Navbar from '@/components/layout/Navbar.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase'
+
+onAuthStateChanged(auth, (user) => {
+  console.log('Connected user:', user)
+})
 </script>
 
 <style>

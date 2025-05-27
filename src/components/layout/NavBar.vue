@@ -155,12 +155,9 @@ const authStore = useAuthStore();
 
 const isMobileMenuOpen = ref(false);
 const isProfileMenuOpen = ref(false);
-const isDarkMode = ref(localStorage.getItem('darkMode') === 'true' || false);
 
-// Utilisateur connecté
 const user = computed(() => authStore.user);
 
-// Initiales de l'utilisateur pour l'avatar
 const userInitials = computed(() => {
   if (!user.value?.displayName) return '?';
 
@@ -172,19 +169,6 @@ const userInitials = computed(() => {
     .substring(0, 2);
 });
 
-// Basculer le mode sombre
-const toggleDarkMode = () => {
-  isDarkMode.value = !isDarkMode.value;
-  localStorage.setItem('darkMode', isDarkMode.value);
-
-  if (isDarkMode.value) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-};
-
-// Déconnexion
 const logout = async () => {
   try {
     await authStore.signOut();
@@ -195,9 +179,4 @@ const logout = async () => {
     console.error('Erreur lors de la déconnexion:', error);
   }
 };
-
-// Initialiser le mode sombre au chargement
-if (isDarkMode.value) {
-  document.documentElement.classList.add('dark');
-}
 </script>

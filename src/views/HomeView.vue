@@ -7,13 +7,9 @@
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4">
-      <GoogleLoginButton />
-      <MicrosoftLoginButton />
+      <RouterLink to="/login" type="button"
+        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        Se connecter avec Google</RouterLink>
     </div>
   </section>
 </template>
-
-<script setup>
-import GoogleLoginButton from '@/components/GoogleLoginButton.vue'
-import MicrosoftLoginButton from '@/components/MicrosoftLoginButton.vue'
-</script>
