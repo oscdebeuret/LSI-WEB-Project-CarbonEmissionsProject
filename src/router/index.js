@@ -5,7 +5,6 @@ import { onAuthStateChanged } from 'firebase/auth'
 import LoginView from '@/views/LoginView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import HomeView from '@/views/HomeView.vue'
-import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
   {
@@ -22,12 +21,6 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardView,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/profile',
-    name: 'ProfileView',
-    component: ProfileView,
     meta: { requiresAuth: true },
   },
   {

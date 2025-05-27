@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="relative z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0">
+    class="z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <RouterLink to="/" class="flex items-center space-x-3 group">
@@ -28,41 +28,6 @@
             class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 font-medium transition-colors duration-200"
             :class="{ 'text-green-600 dark:text-green-400': $route.path === '/dashboard' }">
             Tableau de bord
-          </RouterLink>
-
-          <div v-if="isAuthenticated" class="relative group">
-            <button
-              class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 font-medium transition-colors duration-200 flex items-center">
-              Calculateurs
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            <div
-              class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
-              <div class="py-2">
-                <RouterLink to="/calculator/cloud"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                  Cloud & Digital
-                </RouterLink>
-                <RouterLink to="/calculator/flight"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                  Vols
-                </RouterLink>
-                <RouterLink to="/calculator/custom"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                  Personnalisé
-                </RouterLink>
-              </div>
-            </div>
-          </div>
-
-          <RouterLink v-if="isAuthenticated" to="/comparisons"
-            class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 font-medium transition-colors duration-200"
-            :class="{ 'text-green-600 dark:text-green-400': $route.path === '/comparisons' }">
-            Comparaisons
           </RouterLink>
         </div>
 
@@ -97,10 +62,6 @@
                   <p class="text-sm font-medium text-gray-900 dark:text-white">{{ user?.displayName }}</p>
                   <p class="text-xs text-gray-500 dark:text-gray-400">{{ user?.email }}</p>
                 </div>
-                <RouterLink to="/profile"
-                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                  Mon profil
-                </RouterLink>
                 <button @click="logout"
                   class="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
                   Se déconnecter
