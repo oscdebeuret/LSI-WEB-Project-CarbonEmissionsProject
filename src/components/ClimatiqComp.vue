@@ -2,7 +2,7 @@
   <form @submit.prevent="calculate">
     <div>
       <label>CPU (heures)</label>
-      <input type="number" v-model.number="cpu" min="0" required />
+      <input type="float" v-model.number="cpu" min="0" required />
     </div>
 
     <div>
@@ -15,7 +15,15 @@
       <input type="number" v-model.number="storage" min="0" required />
     </div>
 
-    <button type="submit">Calculer</button>
+    <button type="submit"
+      class="group relative px-3 py-2 bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 min-w-[200px] mt-5">
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-green-700 to-teal-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      </div>
+      <div class="relative flex items-center justify-center">
+        Calculer
+      </div>
+    </button>
 
     <div v-if="result !== null">
       <p>Résultat CO₂e total : {{ result }} kgCO₂e</p>
@@ -45,41 +53,38 @@ async function calculate() {
     Authorization: `Bearer ${CLIMATIQ_API_KEY}`,
     'Content-Type': 'application/json',
   }
-
+  console.log(cpu);
+  console.log(ram);
+  console.log(storage);
   try {
-    let total = 0
+    const response = await axios.post(
+      'https://api.climatiq.io/compute/v1/azure/cpu',
+      {
+        cpu_count: 1,
+        region: 'uk_west',
+        average_vcpu_utilization: 0.75,
+        duration: cpu.value,
+        duration_unit: 'h',
+      },
+      { headers }
+    )
 
-    if (cpu.value > 0) {
-      const resCpu = await axios.post('https://beta3.api.climatiq.io/estimate', {
-        emission_factor: { activity_id: 'compute-server', region: 'eu' },
-        parameters: { hours: cpu.value },
-      }, { headers })
-
-      total += resCpu.data.co2e
-    }
-
-    if (ram.value > 0) {
-      const resRam = await axios.post('https://beta3.api.climatiq.io/estimate', {
-        emission_factor: { activity_id: 'compute-ram', region: 'eu' },
-        parameters: { gb: ram.value },
-      }, { headers })
-
-      total += resRam.data.co2e
-    }
-
-    if (storage.value > 0) {
-      const resStorage = await axios.post('https://beta3.api.climatiq.io/estimate', {
-        emission_factor: { activity_id: 'compute-storage', region: 'eu' },
-        parameters: { gb: storage.value, months: 1 },
-      }, { headers })
-
-      total += resStorage.data.co2e
-    }
-
-    result.value = total.toFixed(4)
+    result.value = response.data.co2e.toFixed(4)
   } catch (err) {
-    error.value = 'Erreur lors du calcul des émissions.'
     console.error(err)
+    error.value = "Erreur lors du calcul des émissions"
   }
 }
 </script>
+
+<style>
+label {
+  color: green;
+}
+
+input {
+  background-color: #f5f5f5;
+  padding: 2px;
+  border-radius: 5px;
+}
+</style>
