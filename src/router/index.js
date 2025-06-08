@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { auth } from '@/firebase'
+import { auth } from '@/auth/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 
 import LoginView from '@/views/LoginView.vue'
