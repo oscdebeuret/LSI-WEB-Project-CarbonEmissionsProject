@@ -4,9 +4,10 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
+  OAuthProvider,
   signOut,
 } from 'firebase/auth'
-import { app } from '../firebase'
+import { app } from '@/auth/firebase'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -47,6 +48,33 @@ export const useAuthStore = defineStore('auth', {
       try {
         const auth = getAuth(app)
         const provider = new GoogleAuthProvider()
+        provider.setCustomParameters({ prompt: 'select_account' })
+        const result = await signInWithPopup(auth, provider)
+
+        this.user = {
+          uid: result.user.uid,
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        }
+
+        router.push(redirectTo)
+        return result.user
+      } catch (error) {
+        this.error = error.message
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async signInWithMicrosoft(router, redirectTo = '/dashboard') {
+      this.loading = true
+      this.error = null
+
+      try {
+        const auth = getAuth(app)
+        const provider = new OAuthProvider('microsoft.com')
         const result = await signInWithPopup(auth, provider)
 
         this.user = {
@@ -79,6 +107,7 @@ export const useAuthStore = defineStore('auth', {
         throw error
       }
     },
+
   },
 
   persist: {

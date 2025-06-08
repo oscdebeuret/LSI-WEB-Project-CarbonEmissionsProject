@@ -15,7 +15,7 @@ import Navbar from '@/components/layout/Navbar.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
 
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase'
+import { auth } from '@/auth/firebase'
 
 onAuthStateChanged(auth, (user) => {
   console.log('Connected user:', user)

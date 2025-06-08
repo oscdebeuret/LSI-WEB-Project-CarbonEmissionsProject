@@ -65,7 +65,7 @@
               </div>
             </button>
 
-            <button @click="loginMicrosoft" :disabled="true"
+            <button @click="loginMicrosoft" :disabled="loading"
               class="group relative w-full flex items-center justify-center px-6 py-4 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 rounded-2xl text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-50 dark:hover:bg-gray-600 hover:border-gray-300 dark:hover:border-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl">
               <div
                 class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -119,15 +119,25 @@ const login = async () => {
     const redirectTo = route.query.redirect || '/dashboard'
     await auth.signInWithGoogle(router, redirectTo)
   } catch (err) {
-    error.value = err.message || 'Erreur inconnue'
+    error.value = err.message || 'Erreur lors de la connexion Google'
   } finally {
     loading.value = false
   }
 }
 
-const loginMicrosoft = () => {
-  console.log('Microsoft login - Coming soon!');
-};
+const loginMicrosoft = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const redirectTo = route.query.redirect || '/dashboard'
+    await auth.signInWithMicrosoft(router, redirectTo)
+  } catch (err) {
+    error.value = err.message || 'Erreur lors de la connexion Microsoft'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <style scoped>
