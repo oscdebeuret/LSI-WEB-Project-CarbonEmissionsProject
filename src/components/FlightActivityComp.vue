@@ -28,15 +28,30 @@
     </div>
 
     <ResultCard v-if="result" class="mt-3" :emoji="'✈️'" :fields="result.fields" :result="result.result_value"
-      :date="result.generated_at" />
+      :date="result.generated_at">
+      <hr />
+      <h3><strong>Comparaison avec la recommandation annuelle</strong></h3>
+      <canvas ref="chartCanvas" class="mt-6"></canvas>
+    </ResultCard>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import ResultCard from '@/components/ResultCard.vue'
+import { ref, watch, nextTick } from 'vue'
 import { calculateTravelEmission } from '@/services/climatiq'
 import { formatDate } from '@/utils'
+import { renderFlightChart } from '@/services/chart'
+import ResultCard from '@/components/ResultCard.vue'
+
+const chartCanvas = ref(null)
+const result = ref(null)
+
+watch(result, (val) => {
+  if (!val) return
+  nextTick(() => {
+    renderFlightChart(chartCanvas.value, parseFloat(val.result_value))
+  })
+})
 
 const form = ref({
   travel_mode: 'air',
@@ -44,7 +59,6 @@ const form = ref({
   destination: 'New-York',
 })
 
-const result = ref(null)
 
 async function calculate() {
   if (!form.value.destination || !form.value.origin) return

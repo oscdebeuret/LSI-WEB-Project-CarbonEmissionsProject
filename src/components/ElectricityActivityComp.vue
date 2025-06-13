@@ -13,7 +13,7 @@
             <input v-model="form.region" type="text" placeholder="Code ISO, ex: FR" class="form-input" />
           </div>
           <div>
-            <label class="block text-sm mb-1 text-gray-700 dark:text-gray-300">Quantité (en kWh)</label>
+            <label class="block text-sm mb-1 text-gray-700 dark:text-gray-300">Quantité (en kWh) par an</label>
             <input v-model.number="form.energy" type="number" placeholder="ex: 1500" class="form-input" />
           </div>
         </div>
@@ -26,14 +26,19 @@
     </div>
 
     <ResultCard v-if="result" class="mt-3" :emoji="'⚡'" :fields="result.fields" :result="result.result_value"
-      :date="result.generated_at" />
+      :date="result.generated_at">
+      <hr />
+      <h3><strong>Comparaison avec la recommandation annuelle</strong></h3>
+      <canvas ref="chartCanvas" class="mt-6"></canvas>
+    </ResultCard>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import ResultCard from '@/components/ResultCard.vue'
 import { calculateElectricityEmission } from '@/services/climatiq'
+import { renderElectricityChart } from '@/services/chart'
 import { formatDate } from '@/utils'
 
 const form = ref({
@@ -41,7 +46,15 @@ const form = ref({
   energy: null
 })
 
+const chartCanvas = ref(null)
 const result = ref(null)
+
+watch(result, (val) => {
+  if (!val) return
+  nextTick(() => {
+    renderElectricityChart(chartCanvas.value, parseFloat(val.result_value))
+  })
+})
 
 async function calculate() {
   if (!form.value.region || !form.value.energy) return
