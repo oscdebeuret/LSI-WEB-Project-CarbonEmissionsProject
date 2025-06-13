@@ -30,6 +30,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
         <CloudComputingActivityComp />
         <FlightActivityComp />
+        <ElectricityActivityComp />
       </div>
 
     </div>
@@ -41,6 +42,7 @@ import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import CloudComputingActivityComp from '@/components/CloudComputingActivityComp.vue'
 import FlightActivityComp from '@/components/FlightActivityComp.vue'
+import ElectricityActivityComp from '@/components/ElectricityActivityComp.vue'
 
 const authStore = useAuthStore()
 const userName = computed(() => authStore.user?.displayName || 'Utilisateur')

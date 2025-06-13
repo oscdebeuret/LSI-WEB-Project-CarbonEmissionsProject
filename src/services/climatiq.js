@@ -36,15 +36,11 @@ export async function calculateEmission({ provider, type, payload }) {
   return res.data
 }
 
-export async function calculateTravelEmission({ travel_mode, origin, destination, car_type }) {
+export async function calculateTravelEmission({ travel_mode, origin, destination }) {
   const payload = {
     travel_mode,
     origin: { query: origin },
     destination: { query: destination },
-  }
-
-  if (travel_mode === 'car' && car_type) {
-    payload.car_details = { car_type }
   }
 
   const response = await axios.post(apiTravelUrl, payload, {
@@ -52,4 +48,26 @@ export async function calculateTravelEmission({ travel_mode, origin, destination
   })
 
   return response.data
+}
+
+export async function calculateElectricityEmission({ region, energy }) {
+  const res = await fetch('https://api.climatiq.io/energy/v1/electricity', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_CLIMATIQ_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      region,
+      source_set: 'core',
+      amount: {
+        energy,
+        energy_unit: 'kWh',
+      },
+    }),
+  })
+
+  if (!res.ok) throw new Error('Erreur API Climatiq')
+  const data = await res.json()
+  return data.location?.consumption || data.market?.consumption || data
 }
