@@ -29,6 +29,12 @@
             :class="{ 'text-green-600 dark:text-green-400': $route.path === '/dashboard' }">
             Tableau de bord
           </RouterLink>
+
+          <RouterLink v-if="isAuthenticated" to="/favoris"
+            class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 font-medium transition-colors duration-200"
+            :class="{ 'text-green-600 dark:text-green-400': $route.path === '/favoris' }">
+            Favoris
+          </RouterLink>
         </div>
 
         <div class="flex items-center space-x-4">

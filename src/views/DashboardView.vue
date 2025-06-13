@@ -27,8 +27,10 @@
         </div>
       </div>
 
-      <!-- 🌍 Composant Climatiq intégré ici -->
-      <ClimatiqComp />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <CloudComputingActivityComp />
+      </div>
+
     </div>
   </div>
 </template>
@@ -36,7 +38,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import ClimatiqComp from '@/components/ClimatiqComp.vue'
+import CloudComputingActivityComp from '@/components/CloudComputingActivityComp.vue'
 
 const authStore = useAuthStore()
 const userName = computed(() => authStore.user?.displayName || 'Utilisateur')
