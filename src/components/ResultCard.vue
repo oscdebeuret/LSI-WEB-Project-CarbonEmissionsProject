@@ -42,7 +42,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { addOrUpdateFavorite } from '@/services/favoritesService'
+import { useAuthStore } from '@/stores/auth'
+import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
   emoji: { type: String },
@@ -55,7 +57,44 @@ const props = defineProps({
 })
 
 const isFavorite = ref(false)
-const toggleFavorite = () => (isFavorite.value = !isFavorite.value)
+const auth = useAuthStore()
+
+watch(() => props.result, () => {
+  isFavorite.value = false
+})
+
+const toggleFavorite = async () => {
+  isFavorite.value = !isFavorite.value
+
+  if (isFavorite.value && auth.user?.uid) {
+    try {
+      const rawPayload = {
+        ...props.fields,
+        co2e: props.result,
+        timestamp: Date.now()
+      }
+
+      // Déduire l'activité à partir des champs
+      if (props.fields.energie) {
+        rawPayload.activityType = 'Electricité'
+        rawPayload.region = props.fields.region
+      } else if (props.fields.distance) {
+        rawPayload.activityType = 'Vol'
+        rawPayload.origin = props.fields.origine
+        rawPayload.destination = props.fields.destination
+      } else {
+        rawPayload.activityType = props.fields.type || 'Inconnu'
+        rawPayload.region = props.fields.region
+        rawPayload.provider = props.fields.provider
+      }
+
+      const payload = cleanPayload(rawPayload)
+      await addOrUpdateFavorite(auth.user.uid, payload)
+    } catch (err) {
+      console.error('Erreur lors de l\'ajout du favori :', err)
+    }
+  }
+}
 
 const cleanedFields = computed(() => {
   const entries = Object.entries(props.fields || {})
@@ -69,4 +108,11 @@ function formatKey(key) {
 function formatValue(value) {
   return typeof value === 'number' ? value : String(value)
 }
+
+function cleanPayload(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v !== undefined)
+  )
+}
+
 </script>
