@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-md text-sm text-gray-800 dark:text-gray-200 space-y-4">
+    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 text-sm text-gray-800 dark:text-gray-200 space-y-4">
 
     <div class="flex items-start justify-between">
       <div>

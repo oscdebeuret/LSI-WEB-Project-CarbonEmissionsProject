@@ -3,6 +3,7 @@ const CLIMATIQ_API_KEY = import.meta.env.VITE_CLIMATIQ_API_KEY
 import axios from 'axios'
 
 const apiBase = 'https://api.climatiq.io/compute/v1'
+const apiTravelUrl = 'https://preview.api.climatiq.io/travel/v1-preview1/distance'
 const token = `Bearer ${CLIMATIQ_API_KEY}`
 
 export async function fetchProviders() {
@@ -33,4 +34,22 @@ export async function calculateEmission({ provider, type, payload }) {
     headers: { Authorization: token },
   })
   return res.data
+}
+
+export async function calculateTravelEmission({ travel_mode, origin, destination, car_type }) {
+  const payload = {
+    travel_mode,
+    origin: { query: origin },
+    destination: { query: destination },
+  }
+
+  if (travel_mode === 'car' && car_type) {
+    payload.car_details = { car_type }
+  }
+
+  const response = await axios.post(apiTravelUrl, payload, {
+    headers: { Authorization: token },
+  })
+
+  return response.data
 }

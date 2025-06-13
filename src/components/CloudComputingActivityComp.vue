@@ -4,7 +4,7 @@
       class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-all duration-300 transform">
       <div class="text-2xl font-semibold text-center text-gray-900 dark:text-white mb-6">
         <h1>🌍</h1>
-        <h2>Cloud computing activity</h2>
+        <h2>Empreinte carbone du cloud</h2>
       </div>
 
       <form @submit.prevent="calculate">
