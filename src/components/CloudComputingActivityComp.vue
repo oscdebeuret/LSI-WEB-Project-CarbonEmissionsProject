@@ -4,11 +4,11 @@
       class="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-gray-700 transition-all duration-300 transform">
       <div class="text-2xl font-semibold text-center text-gray-900 dark:text-white mb-6">
         <h1>🌍</h1>
-        <h2>Cloud computing activity</h2>
+        <h2>Empreinte carbone - Cloud</h2>
       </div>
 
       <form @submit.prevent="calculate">
-        <div class="space-y-2 text-sm">
+        <div class="space-y-3 text-sm">
           <div class="flex flex-col sm:flex-row gap-4">
             <div class="sm:w-1/2">
               <label class="block text-gray-700 dark:text-gray-300 mb-1">Fournisseur cloud</label>
@@ -30,7 +30,6 @@
             </div>
           </div>
 
-          <!-- Région -->
           <div v-if="selectedProvider">
             <label class="block text-gray-700 dark:text-gray-300 mb-1">Région</label>
             <select v-model="selectedRegion" class="form-select">
@@ -77,24 +76,12 @@
                 <option value="hdd">HDD</option>
               </select>
             </div>
-            <div class="sm:w-full">
-              <label class="block text-gray-700 dark:text-gray-300 mb-1 mt-4 sm:mt-0">Durée (h)</label>
-              <input v-model.number="form.duration" type="number" min="1" class="form-input" />
-            </div>
+
           </div>
 
-          <div v-if="activityType === 'instance'" class="flex flex-col sm:flex-row gap-4 mb-2">
-            <div class="sm:w-1/2">
-              <label class="block text-gray-700 dark:text-gray-300 mb-1">Instance VM</label>
-              <select v-model="form.instance" class="form-select">
-                <option disabled value="">Choisir...</option>
-                <option v-for="i in availableInstances" :key="i" :value="i">{{ i }}</option>
-              </select>
-            </div>
-            <div class="sm:w-1/2">
-              <label class="block text-gray-700 dark:text-gray-300 mb-1">Durée (h)</label>
-              <input v-model.number="form.duration" type="number" min="1" class="form-input" />
-            </div>
+          <div class="sm:w-full">
+            <label class="block text-gray-700 dark:text-gray-300 mb-1 mt-4 sm:mt-0">Durée (h)</label>
+            <input v-model.number="form.duration" type="number" min="1" class="form-input" />
           </div>
         </div>
 
@@ -105,7 +92,7 @@
       </form>
     </div>
 
-    <ResultCard v-if="result" class="mt-3" :result="result.result_value" :fields="result.fields"
+    <ResultCard v-if="result" class="mt-3" :emoji="'🌿'" :result="result.result_value" :fields="result.fields"
       :date="result.generated_at" />
   </div>
 </template>

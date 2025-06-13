@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-md text-sm text-gray-800 dark:text-gray-200 space-y-4">
+    class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 text-sm text-gray-800 dark:text-gray-200 space-y-4">
 
     <div class="flex items-start justify-between">
       <div>
         <div class="flex items-center gap-2 text-green-700 dark:text-green-300 font-semibold text-base">
-          🌿 {{ result }} kg CO₂e
+          {{ emoji }} {{ result }} kg CO₂e
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Généré le {{ date }}
@@ -36,6 +36,8 @@
         </div>
       </template>
     </div>
+
+    <slot></slot>
   </div>
 </template>
 
@@ -45,6 +47,7 @@ import { useAuthStore } from '@/stores/auth'
 import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
+  emoji: { type: String },
   fields: {
     type: Object,
     required: true
