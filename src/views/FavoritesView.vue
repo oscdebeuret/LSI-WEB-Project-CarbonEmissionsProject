@@ -14,7 +14,7 @@
         <p class="text-sm text-gray-500 mb-2">{{ formatDate(fav.timestamp) }}</p>
         <h2 class="text-lg font-semibold text-gray-800 dark:text-white">{{ fav.activityType.toUpperCase() }} • {{ fav.region }}</h2>
         <p class="text-gray-700 dark:text-gray-300">Fournisseur : <strong>{{ fav.provider }}</strong></p>
-        <p class="text-gray-700 dark:text-gray-300">Durée : <strong>{{ fav.data.duration }} h</strong></p>
+        <p class="text-gray-700 dark:text-gray-300">Durée : <strong>{{ fav.duration }} h</strong></p>
         <p class="text-gray-700 dark:text-gray-300">CO₂e : <strong>{{ fav.co2e }} kg</strong></p>
 
         <button
