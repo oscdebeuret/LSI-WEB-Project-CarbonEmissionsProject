@@ -26,27 +26,20 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div
-          class="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-          <div class="flex items-center justify-between">
-            <div>
-              <ClimatiqComp></ClimatiqComp>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <!-- 🌍 Composant Climatiq intégré ici -->
+      <ClimatiqComp />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useAuthStore } from '@/stores/auth';
-import ClimatiqComp from '@/components/ClimatiqComp.vue';
+import { computed } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import ClimatiqComp from '@/components/ClimatiqComp.vue'
 
-const authStore = useAuthStore();
-const userName = computed(() => authStore.user?.displayName || 'Utilisateur');
+const authStore = useAuthStore()
+const userName = computed(() => authStore.user?.displayName || 'Utilisateur')
 </script>
 
 <style scoped>
