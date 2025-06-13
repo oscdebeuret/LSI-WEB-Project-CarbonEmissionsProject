@@ -6,17 +6,31 @@ const FAVORITES_COLLECTION = 'favorites'
 export async function addOrUpdateFavorite(uid, data) {
   const favoritesRef = collection(db, FAVORITES_COLLECTION)
 
-  const q = query(
-    favoritesRef,
+  const filters = [
     where('uid', '==', uid),
-    where('activityType', '==', data.activityType),
-    where('region', '==', data.region)
-  )
+    where('activityType', '==', data.activityType)
+  ]
+
+  // Ajout conditionnel des critères spécifiques selon le type d'activité
+  if (data.activityType === 'CPU (vCPU)' || data.activityType === 'RAM (GB)') {
+    if (data.region) filters.push(where('region', '==', data.region))
+    if (data.provider) filters.push(where('provider', '==', data.provider))
+  }
+
+  if (data.activityType === 'Electricité') {
+    if (data.region) filters.push(where('region', '==', data.region))
+  }
+
+  if (data.activityType === 'Vol') {
+    if (data.origin) filters.push(where('origin', '==', data.origin))
+    if (data.destination) filters.push(where('destination', '==', data.destination))
+  }
+
+  const q = query(favoritesRef, ...filters)
 
   const snapshot = await getDocs(q)
 
   if (!snapshot.empty) {
-    // On met à jour le premier document trouvé
     const existingDoc = snapshot.docs[0]
     await updateDoc(doc(db, FAVORITES_COLLECTION, existingDoc.id), {
       ...data,

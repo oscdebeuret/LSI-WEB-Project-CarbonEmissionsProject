@@ -69,11 +69,23 @@ const toggleFavorite = async () => {
   if (isFavorite.value && auth.user?.uid) {
     try {
       const rawPayload = {
-      ...props.fields,
-      co2e: props.result,
-      activityType: props.fields.type,
-      region: props.fields.region,
-      provider: props.fields.provider
+        ...props.fields,
+        co2e: props.result,
+        timestamp: Date.now()
+      }
+
+      // Déduire l'activité à partir des champs
+      if (props.fields.energie) {
+        rawPayload.activityType = 'Electricité'
+        rawPayload.region = props.fields.region
+      } else if (props.fields.distance) {
+        rawPayload.activityType = 'Vol'
+        rawPayload.origin = props.fields.origine
+        rawPayload.destination = props.fields.destination
+      } else {
+        rawPayload.activityType = props.fields.type || 'Inconnu'
+        rawPayload.region = props.fields.region
+        rawPayload.provider = props.fields.provider
       }
 
       const payload = cleanPayload(rawPayload)
