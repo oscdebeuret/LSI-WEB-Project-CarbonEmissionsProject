@@ -25,7 +25,7 @@
       </form>
     </div>
 
-    <ResultCard v-if="result" class="mt-6" :fields="result.fields" :result="result.result_value"
+    <ResultCard v-if="result" class="mt-3" :emoji="'⚡'" :fields="result.fields" :result="result.result_value"
       :date="result.generated_at" />
   </div>
 </template>
@@ -37,7 +37,7 @@ import { calculateElectricityEmission } from '@/services/climatiq'
 import { formatDate } from '@/utils'
 
 const form = ref({
-  region: '',
+  region: 'FR',
   energy: null
 })
 

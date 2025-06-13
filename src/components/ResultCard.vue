@@ -5,7 +5,7 @@
     <div class="flex items-start justify-between">
       <div>
         <div class="flex items-center gap-2 text-green-700 dark:text-green-300 font-semibold text-base">
-          🌿 {{ result }} kg CO₂e
+          {{ emoji }} {{ result }} kg CO₂e
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Généré le {{ date }}
@@ -43,6 +43,7 @@
 import { ref, computed } from 'vue'
 
 const props = defineProps({
+  emoji: { type: String },
   fields: {
     type: Object,
     required: true

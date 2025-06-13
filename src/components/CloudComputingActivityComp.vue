@@ -92,7 +92,7 @@
       </form>
     </div>
 
-    <ResultCard v-if="result" class="mt-3" :result="result.result_value" :fields="result.fields"
+    <ResultCard v-if="result" class="mt-3" :emoji="'🌿'" :result="result.result_value" :fields="result.fields"
       :date="result.generated_at" />
   </div>
 </template>

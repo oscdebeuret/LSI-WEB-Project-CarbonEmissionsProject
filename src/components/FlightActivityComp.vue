@@ -27,7 +27,7 @@
       </form>
     </div>
 
-    <ResultCard v-if="result" class="mt-6" :fields="result.fields" :result="result.result_value"
+    <ResultCard v-if="result" class="mt-3" :emoji="'✈️'" :fields="result.fields" :result="result.result_value"
       :date="result.generated_at" />
   </div>
 </template>
@@ -40,8 +40,8 @@ import { formatDate } from '@/utils'
 
 const form = ref({
   travel_mode: 'air',
-  origin: '',
-  destination: '',
+  origin: 'Paris',
+  destination: 'New-York',
 })
 
 const result = ref(null)
