@@ -73,8 +73,11 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-
 import { estimateCpuEmission } from '@/services/climatiqService'
+import { addFavorite } from '@/services/favoritesService'
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
