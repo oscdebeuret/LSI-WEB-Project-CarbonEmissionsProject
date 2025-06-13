@@ -75,6 +75,10 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { addOrUpdateFavorite } from '@/services/favoritesService'
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
 
 const apiBase = 'https://api.climatiq.io/compute/v1'
 const token = `Bearer ${import.meta.env.VITE_CLIMATIQ_API_KEY}`
@@ -168,6 +172,16 @@ async function calculate() {
       headers: { Authorization: token }
     })
     result.value = (res.data.total_co2e || res.data.co2e)?.toFixed(4)
+
+    if (auth.isAuthenticated) {
+      await addOrUpdateFavorite(auth.user.uid, {
+        provider: selectedProvider.value,
+        region: selectedRegion.value,
+        activityType: activityType.value,
+        data: { ...form.value },
+        co2e: result.value,
+      })
+    }
   } catch (e) {
     console.error('Erreur API', e)
     result.value = 'Erreur'
