@@ -1,49 +1,70 @@
-# email-manager
+# 🌍 Carbon Emissions Project
 
-This template should help get you started developing with Vue 3 in Vite.
+IBOS Geoffrey - DEBEURET Oscar
 
-## Recommended IDE Setup
+Cette application permet aux utilisateurs de **calculer et comparer leurs émissions de CO₂** selon plusieurs types d'activités, avec un système de **favoris persistants** en base via Firebase. L'authentification est gérée via Microsoft et Google OAuth.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Customize configuration
+## 🚀 Lancer le projet
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### 1. Cloner le projet
 
-## Project Setup
+```bash
+git clone https://github.com/oscdebeuret/LSI-WEB-Project-CarbonEmissionsProject
+cd email-manager
+```
 
-```sh
+### 2. Installer les dépendances
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. Lancer le serveur en développement
 
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+L'application sera accessible sur : [http://localhost:8080](http://localhost:8080)
 
-```sh
-npm run build
+---
+
+## ✨ Fonctionnalités principales
+
+- 🔐 Authentification avec **Google** et **Microsoft** (OAuth 2.0)
+- 📊 Calcul des émissions de CO₂ via l’API **Climatiq**
+  - Cloud computing : CPU, RAM, Stockage, VM
+  - Vols (Flight activity)
+  - Électricité (kWh)
+- ⭐ Système de **favoris** avec persistance via **Firebase Firestore**
+- 📈 **Graphiques comparatifs** via Chart.js (ex. : émissions recommandées vs personnelles)
+- 🔌 Tunnel **ngrok** utilisé pour exposer en local l’application avec Firebase
+
+---
+
+## 🔧 Stack technique
+
+- **Vue 3** (Composition API)
+- **Pinia** + `pinia-plugin-persistedstate`
+- **Vue Router**
+- **Chart.js** & `vue-chartjs`
+- **Climatiq API**
+- **Firebase (auth + Firestore)**
+- **OAuth 2.0** (Google & Microsoft)
+- **Tailwind CSS**
+- **Vite**
+
+---
+
+## 📁 Organisation
+
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-
-### Dépendances
-
-```sh
-npm install \
-  axios \
-  pinia \
-  vue-router \
-  vue3-google-login \
-  @azure/msal-browser \
-  chart.js \
-  vue-chartjs \
-  @fortawesome/fontawesome-free
+src/
+├── components/          // Composants Vue (formulaires, cartes résultats)
+├── views/               // Pages Vue.js
+├── services/            // API calls (Climatiq, Firebase)
+├── store/               // Pinia stores
+└── assets/              // Styles, icônes, etc.
 ```
